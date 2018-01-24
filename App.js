@@ -110,7 +110,7 @@ export default class Application extends Component {
                 <SideMenu
                     edgeHitWidth={60}
                     toleranceX={10}
-                    openMenuOffset={240}
+                    openMenuOffset={280}
                     bounceBackOnOverdraw={false}
                     isOpen={false}
                     menu={ <MainMenu data={defaultMenuData}/> }
@@ -121,7 +121,7 @@ export default class Application extends Component {
     }
     render(){
         return(
-            <View style={{backgroundColor: "#146CB4", height: '100%', width: '100%'}}>
+            <View style={{backgroundColor: "#8E44AD", height: '100%', width: '100%'}}>
                 { this.getPage.call(this) }
             </View>
         );

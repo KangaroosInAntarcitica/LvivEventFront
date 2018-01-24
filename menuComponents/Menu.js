@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     page: {
         width: '100%',
         height: '100%',
-        backgroundColor: "#FFFFFF"
+        backgroundColor: "#ecf0f1"
     },
     backgroundImage: {
         width: '100%',
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 30,
         color: "#FFFFFF",
-        fontWeight: 'normal',
+        fontWeight: 'bold',
         margin: 6
     },
     options: {
@@ -161,14 +161,15 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: "#FFFFFF",
         paddingTop: 8,
-        paddingHorizontal: 4
+        paddingHorizontal: 4,
+        fontWeight: 'normal'
     },
     optionsTextSelected: {
         fontSize: 24,
         color: "#FFFFFF",
         paddingTop: 8,
         paddingHorizontal: 4,
-        fontWeight: 'bold'
+        fontWeight: 'normal'
     },
     shadow: {
         position: 'absolute',

@@ -19,7 +19,6 @@ class EventInfo extends Component{
     render(){
         return(
             <View style={styles.eventInfo}>
-                <Image source={require('../images/eventFront.png')} style={styles.backgroundImage}/>
                 {this.props.organisator ?
                     <View style={styles.infoOrganisator}>
                         <Image style={styles.infoPicture} source={require('../images/icons/profileCircle.png')}/>
@@ -153,19 +152,20 @@ const styles = StyleSheet.create({
         marginVertical: 4
     },
     event: {
-        width: Dimensions.get('window').width,
+        width: Dimensions.get('window').width - 20,
+        marginHorizontal: 10,
         marginVertical: 4
     },
     eventTextBox: {
         height: 40,
-        backgroundColor: '#CAA3DB',
+        backgroundColor: '#FFFFFF',
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     eventText: {
         textAlign: 'left',
         fontSize: 20,
-        color: "#FFFFFF",
+        color: "#A05ABF",
         padding: 4,
         paddingHorizontal: 10
     },
@@ -201,14 +201,14 @@ const styles = StyleSheet.create({
     infoTime: {
         height: 20,
         width: 'auto',
-        backgroundColor: '#FF445588',
+        backgroundColor: '#FF4455',
         borderRadius: 10,
         margin: 5,
     },
     infoOrganisator: {
         height: 20,
         width: 'auto',
-        backgroundColor: '#5599FF88',
+        backgroundColor: '#5599FF',
         borderRadius: 10,
         margin: 5,
     },
@@ -243,14 +243,15 @@ const styles = StyleSheet.create({
 
     details: {
         width: '100%',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        marginTop: 2
     },
     detailsItem: {
         width: '100%',
         height: 30,
-        borderColor: '#DDDDDD',
-        borderTopWidth: 1,
-        flexDirection: 'row'
+        marginBottom: 2,
+        flexDirection: 'row',
+        backgroundColor: '#FFFFFF'
     },
     detailsTextName: {
         width: 120,

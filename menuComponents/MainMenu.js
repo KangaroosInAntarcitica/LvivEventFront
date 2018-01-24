@@ -61,6 +61,22 @@ class MainMenuHeader extends PureComponent {
     }
 }
 
+class ProfileItem extends Component {
+    render(){
+        const style = this.props.selected ? styles.buttonSelected : styles.button;
+        const textStyle = this.props.selected ? styles.buttonTextSelected : styles.buttonText;
+        const imageStyle = this.props.selected ? styles.buttonImageSelected : styles.buttonImage;
+        return(
+            <TouchableOpacity style={styles.profileItem}>
+
+                <Image style={styles.profileItemPicture} source={require('../images/defaultProfile.png')} />
+                <Text style={styles.profileText} > {'Yuriy Mikolayovitch'} </Text>
+            </TouchableOpacity>
+        );
+        <Image style={styles.profileItemBack} source={require('../images/mainMenuHeader.png')} />
+    }
+}
+
 class MainMenuItem extends Component{
     // Properties: data {id, title}; onPress(id); selected = bool
     onPress(){
@@ -69,8 +85,10 @@ class MainMenuItem extends Component{
     renderButton(){
         const style = this.props.selected ? styles.buttonSelected : styles.button;
         const textStyle = this.props.selected ? styles.buttonTextSelected : styles.buttonText;
+        const imageStyle = this.props.selected ? styles.buttonImageSelected : styles.buttonImage;
         return (
             <TouchableOpacity style={style} onPress={this.onPress.bind(this)}>
+                <Image style={imageStyle} source={require('../images/icons/calendar.png')} />
                 <Text style={textStyle}> {this.props.title} </Text>
             </TouchableOpacity>
         );
@@ -135,6 +153,7 @@ export default class MainMenu extends PureComponent {
         return (
             <View style={styles.page}>
                 <MainMenuHeader data={headerData} onPress={this.changeTab.bind(this)} selected={this.state.selectedTab}/>
+                <ProfileItem />
                 <FlatList
                     data={this.state.selectedData}
                     extraData={this.state}
@@ -148,7 +167,7 @@ export default class MainMenu extends PureComponent {
 
 const styles = StyleSheet.create({
     page: {
-        width: 240,
+        width: 280,
         height: "100%",
         backgroundColor: "#8E44AD",
         flexDirection: "column"
@@ -160,28 +179,39 @@ const styles = StyleSheet.create({
         resizeMode: 'stretch'
     },
     button: {
-        margin: 4,
-        marginVertical: 2,
-        padding: 10,
-        paddingVertical: 4,
-        height: 34
+        height: 50,
+        flexDirection: 'row'
     },
     buttonSelected: {
-        height: 34,
-        margin: 6,
-        marginVertical: 2,
-        padding: 10,
-        paddingVertical: 4,
-        borderRadius: 20,
-        backgroundColor: '#F6FBFE'
+        height: 50,
+        flexDirection: 'row',
+        backgroundColor: '#FFFFFF22'
+    },
+    buttonImage: {
+        width: 40,
+        height: 40,
+        margin: 5,
+        resizeMode: 'stretch',
+        tintColor: '#FFFFFFAA'
+    },
+    buttonImageSelected: {
+        width: 40,
+        height: 40,
+        margin: 5,
+        resizeMode: 'stretch',
+        tintColor: '#FFFFFF'
     },
     buttonText: {
-        color: 'white',
-        fontSize: 18
+        color: '#FFFFFFAA',
+        fontSize: 20,
+        marginLeft: 10,
+        marginTop: 8
     },
     buttonTextSelected: {
-        color: '#8E44AD',
-        fontSize: 18
+        color: '#FFFFFF',
+        fontSize: 20,
+        marginLeft: 10,
+        marginTop: 8
     },
     title: {
         color: '#FFFFFF',
@@ -222,5 +252,34 @@ const styles = StyleSheet.create({
         margin: 5,
         resizeMode: 'stretch',
         tintColor: '#8E44AD'
+    },
+
+    profileItem: {
+        width: '100%',
+        height: 100,
+        backgroundColor: '#8E44AD',
+        flexDirection: 'row'
+    },
+    profileItemBack: {
+        width: '100%',
+        height: 100,
+        bottom: 0,
+        left: 0,
+        position: 'absolute',
+        resizeMode: 'stretch'
+    },
+    profileItemPicture: {
+        width: 40,
+        height: 40,
+        margin: 5,
+        borderRadius: 100,
+        resizeMode: 'stretch'
+    },
+    profileText: {
+        color: 'white',
+        fontSize: 24,
+        marginHorizontal: 10,
+        marginTop: 6,
+        maxWidth: 210
     }
 });
