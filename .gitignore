@@ -9,8 +9,6 @@ ios/
 
 node_modules/
 
-images/
-
 .babelrc
 .buckconfig
 .flowconfig
