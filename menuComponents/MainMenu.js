@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     page: {
         width: 240,
         height: "100%",
-        backgroundColor: "#146CB4",
+        backgroundColor: "#8E44AD",
         flexDirection: "column"
     },
     backgroundImage: {
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     buttonTextSelected: {
-        color: '#146CB4',
+        color: '#8E44AD',
         fontSize: 18
     },
     title: {
@@ -210,15 +210,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFFAA'
     },
     headerImage: {
-        height: '100%',
-        width: '100%',
+        height: 40,
+        width: 40,
+        margin: 5,
         resizeMode: 'stretch',
         tintColor: '#FFFFFF99'
     },
     headerImageSelected: {
-        height: '100%',
-        width: '100%',
+        height: 40,
+        width: 40,
+        margin: 5,
         resizeMode: 'stretch',
-        tintColor: '#146CB4'
+        tintColor: '#8E44AD'
     }
 });

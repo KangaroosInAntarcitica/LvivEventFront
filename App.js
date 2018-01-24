@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { AppRegistry, Alert, View } from 'react-native';
+import { BackHandler, AppRegistry, Alert, View } from 'react-native';
 
 import Login from "./loginComponents/Login.js";
 import Register from "./loginComponents/Register.js"
@@ -39,7 +39,7 @@ export default class Application extends Component {
     constructor(properties){
         super();
         this.state = {
-            appState: "login",
+            appState: "menu",
             menuState: "events",
             menuStateDetails: null,
             // the information showed in the Menu (details in the Menu.js file)
@@ -53,6 +53,9 @@ export default class Application extends Component {
         this.getPage = this.getPage.bind(this);
         this.setMenu = this.setMenu.bind(this);
         this.setAppState = this.setAppState.bind(this);
+
+        // set back button
+        BackHandler.addEventListener('hardwareBackPress', () => { return true });
 
         // make global
         window.setMenu = this.setMenu;
@@ -103,17 +106,18 @@ export default class Application extends Component {
             />);
 
         else if(this.state.appState === "menu")
-            return(<SideMenu
-                edgeHitWidth={60}
-                toleranceX={10}
-                openMenuOffset={240}
-                bounceBackOnOverdraw={false}
-                isOpen={false}
-                menu={ <MainMenu data={defaultMenuData}/> }
-
-            >
-                { this.getMenu() }
-            </SideMenu>);
+            return(
+                <SideMenu
+                    edgeHitWidth={60}
+                    toleranceX={10}
+                    openMenuOffset={240}
+                    bounceBackOnOverdraw={false}
+                    isOpen={false}
+                    menu={ <MainMenu data={defaultMenuData}/> }
+                >
+                    { this.getMenu() }
+                </SideMenu>
+            );
     }
     render(){
         return(

@@ -14,10 +14,9 @@ class Header extends Component{
     render(){
         return(
             <View style={styles.header}>
-                <Image style={styles.backgroundImage} source={require('../images/menuHeaderBack.png')} />
                 <View>
                     <TouchableOpacity onPress={ () => {} } style={styles.headerButton}>
-                        <Image style={styles.backgroundImage} source={require('../images/icons/menu.png')} />
+                        <Image style={styles.backgroundImage} source={require('../images/icons/backArrow.png')} />
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.headerText}> { this.props.text } </Text>
@@ -38,10 +37,8 @@ class Option extends Component{
     render(){
         if(this.props.selected)
             return(
-                <TouchableOpacity onPress={ this.onPress.bind(this) } style={styles.optionsButton}>
-                    <View style={styles.optionsButtonRect}>
-                        <Text style={styles.optionsTextSelected}> {this.props.title} </Text>
-                    </View>
+                <TouchableOpacity onPress={ this.onPress.bind(this) } style={styles.optionsButtonSelected}>
+                    <Text style={styles.optionsTextSelected}> {this.props.title} </Text>
                 </TouchableOpacity>
             );
         else
@@ -111,7 +108,7 @@ const styles = StyleSheet.create({
     page: {
         width: '100%',
         height: '100%',
-        backgroundColor: "#F6FBFE"
+        backgroundColor: "#FFFFFF"
     },
     backgroundImage: {
         width: '100%',
@@ -122,7 +119,7 @@ const styles = StyleSheet.create({
     header: {
         width: "100%",
         height: 50,
-        backgroundColor: "#146CB4",
+        backgroundColor: "#8e44ad",
         flexDirection: "row",
         justifyContent: "space-between"
     },
@@ -134,43 +131,44 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     headerText: {
-        fontSize: 24,
+        fontSize: 30,
         color: "#FFFFFF",
-        fontWeight: 'bold',
-        margin: 8
+        fontWeight: 'normal',
+        margin: 6
     },
     options: {
         width: "100%",
-        height: 40,
-        backgroundColor: "#227FDD",
+        height: 50,
         justifyContent: "flex-start",
-        flexDirection: "row"
+        flexDirection: "row",
+        backgroundColor: "#a05abf"
     },
     optionsList: {
         justifyContent: "flex-start",
         flexDirection: "row"
     },
     optionsButton: {
-        height: 40
+        height: 50,
+        backgroundColor: "#a05abf"
     },
-    optionsButtonRect: {
-        height: 30,
-        margin: 5,
-        padding: 0,
-        backgroundColor: '#146CB4',
-        borderRadius: 15
+    optionsButtonSelected: {
+        height: 50,
+        borderBottomWidth: 5,
+        backgroundColor: "#a05abf",
+        borderColor: "#FFFFFF"
     },
     optionsText: {
-        fontSize: 22,
-        color: "#146CB4",
-        padding: 6,
-        paddingHorizontal: 15
+        fontSize: 24,
+        color: "#FFFFFF",
+        paddingTop: 8,
+        paddingHorizontal: 4
     },
     optionsTextSelected: {
-        fontSize: 22,
-        color: '#FFFFFF',
-        padding: 0,
-        paddingHorizontal: 10,
+        fontSize: 24,
+        color: "#FFFFFF",
+        paddingTop: 8,
+        paddingHorizontal: 4,
+        fontWeight: 'bold'
     },
     shadow: {
         position: 'absolute',

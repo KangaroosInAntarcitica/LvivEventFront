@@ -22,13 +22,13 @@ class EventInfo extends Component{
                 <Image source={require('../images/eventFront.png')} style={styles.backgroundImage}/>
                 {this.props.organisator ?
                     <View style={styles.infoOrganisator}>
-                        <Image style={styles.infoPicture} source={require('../images/icons/person.png')}/>
+                        <Image style={styles.infoPicture} source={require('../images/icons/profileCircle.png')}/>
                         <Text style={styles.infoText}> {this.props.organisator} </Text>
                     </View>
                     : null}
                 {this.props.startdate ?
                     <View style={styles.infoTime}>
-                        <Image style={styles.infoPicture} source={require('../images/icons/time.png')}/>
+                        <Image style={styles.infoPicture} source={require('../images/icons/clock.png')}/>
                         <Text style={styles.infoText}> {this.props.startdate}</Text>
                     </View>
                     : null}
@@ -42,17 +42,17 @@ class EventDetails extends Component{
         return(
             <View style={styles.details}>
                 <View style={styles.detailsItem}>
-                    <Image style={styles.detailsImage} source={require('../images/icons/person.png')}/>
+                    <Image style={styles.detailsImage} source={require('../images/icons/profileCircle.png')}/>
                     <Text style={styles.detailsTextName}> Organisator: </Text>
                     <Text style={styles.detailsText}> {this.props.organisator || 'unknown'} </Text>
                 </View>
                 <View style={styles.detailsItem}>
-                    <Image style={styles.detailsImage} source={require('../images/icons/time.png')}/>
+                    <Image style={styles.detailsImage} source={require('../images/icons/clock.png')}/>
                     <Text style={styles.detailsTextName}> Start date: </Text>
                     <Text style={styles.detailsText}> {this.props.startdate || 'unknown'} </Text>
                 </View>
                 <View style={styles.detailsItem}>
-                    <Image style={styles.detailsImage} source={require('../images/icons/time.png')}/>
+                    <Image style={styles.detailsImage} source={require('../images/icons/clock.png')}/>
                     <Text style={styles.detailsTextName}> End date: </Text>
                     <Text style={styles.detailsText}> {this.props.enddate || 'unknown'} </Text>
                 </View>
@@ -158,14 +158,14 @@ const styles = StyleSheet.create({
     },
     eventTextBox: {
         height: 40,
-        backgroundColor: '#B3DEF8',
+        backgroundColor: '#CAA3DB',
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     eventText: {
         textAlign: 'left',
         fontSize: 20,
-        color: "#2E72A0",
+        color: "#FFFFFF",
         padding: 4,
         paddingHorizontal: 10
     },
@@ -192,11 +192,11 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     infoPicture: {
-        width: 14,
-        height: 14,
+        width: 18,
+        height: 18,
         position: 'absolute',
-        top: 3,
-        left: 3
+        left: 1,
+        top: 1
     },
     infoTime: {
         height: 20,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     },
     moreButton: {
         height: 30,
-        backgroundColor: '#5CA1D8',
+        backgroundColor: '#A05ABF',
         borderRadius: 15,
         margin: 5,
     },
@@ -230,17 +230,15 @@ const styles = StyleSheet.create({
     extendButton: {
         width: 30,
         height: 30,
-        backgroundColor: '#5CA1D8',
+        backgroundColor: '#A05ABF',
         borderRadius: 15,
         margin: 5,
         marginLeft: 0,
     },
     extendImage: {
-        width: 16,
-        height: 16,
-        position: 'absolute',
-        top: 7,
-        left: 7
+        width: 30,
+        height: 30,
+        position: 'absolute'
     },
 
     details: {

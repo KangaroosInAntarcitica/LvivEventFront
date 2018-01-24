@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Header, AppRegistry, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Dimensions } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 
 
 // properties: url, onSuccess, register
@@ -50,7 +50,7 @@ export default class Login extends Component{
                         <Image style={{width: 30, height: 30, position: 'absolute', top: 10, left: 10}} source={require('../images/icons/backArrow.png')} />
                     </TouchableOpacity>
                     <Text style={{color: '#FFFFFF', fontSize: 24, padding: 10}}> Registration </Text>
-                    <View style={{width: 50}}/>
+                    <View style={{width: 50, height: 50}}/>
                 </View>
                 <View style={styles.page}>
                     <Text style={styles.information} > { this.state.message } </Text>
