@@ -47,7 +47,7 @@ export default class Login extends Component{
             <View>
                 <View style={styles.header}>
                     <TouchableOpacity style={{width: 50, height: 50}} onPress={this.props.login} >
-                        <Image style={{width: 30, height: 30, position: 'absolute', top: 10, left: 10}} source={require('./images/backArrow.png')} />
+                        <Image style={{width: 30, height: 30, position: 'absolute', top: 10, left: 10}} source={require('../images/icons/backArrow.png')} />
                     </TouchableOpacity>
                     <Text style={{color: '#FFFFFF', fontSize: 24, padding: 10}}> Registration </Text>
                     <View style={{width: 50}}/>

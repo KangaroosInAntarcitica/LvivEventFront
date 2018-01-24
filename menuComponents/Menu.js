@@ -14,16 +14,16 @@ class Header extends Component{
     render(){
         return(
             <View style={styles.header}>
-                <Image style={styles.backgroundImage} source={require('./images/menuHeaderBack.png')} />
+                <Image style={styles.backgroundImage} source={require('../images/menuHeaderBack.png')} />
                 <View>
                     <TouchableOpacity onPress={ () => {} } style={styles.headerButton}>
-                        <Image style={styles.backgroundImage} source={require('./images/menu-icon-white.png')} />
+                        <Image style={styles.backgroundImage} source={require('../images/icons/menu.png')} />
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.headerText}> { this.props.text } </Text>
                 <View style={{flexDirection: 'row'}} >
                     <TouchableOpacity onPress={ ()=>{} } style={styles.headerButton} >
-                        <Image style={styles.backgroundImage} source={require('./images/search-icon-white.png')} />
+                        <Image style={styles.backgroundImage} source={require('../images/icons/search.png')} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -91,7 +91,6 @@ class Options extends PureComponent{
                 />
             </View>
         );
-        <Image style={styles.backgroundImage} source={require('./images/menuOptionsBack.png')} />
     }
 }
 

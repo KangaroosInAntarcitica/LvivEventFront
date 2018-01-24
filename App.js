@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import { AppRegistry, Alert, View } from 'react-native';
 
-import Login from "./Login.js";
-import Register from "./Register.js"
-import Menu from "./Menu.js";
-import MainMenu from "./MainMenu.js";
-import EventsList from "./EventsList.js";
-import Event from "./Event.js";
-import NewEvent from "./NewEvent.js";
+import Login from "./loginComponents/Login.js";
+import Register from "./loginComponents/Register.js"
+import Menu from "./menuComponents/Menu.js";
+import MainMenu from "./menuComponents/MainMenu.js";
+import EventsList from "./menuComponents/EventsList.js";
+import Event from "./menuComponents/Event.js";
+import NewEvent from "./menuComponents/NewEvent.js";
 
 import SideMenu from './node_modules/react-native-side-menu/index.js'
 
@@ -39,7 +39,7 @@ export default class Application extends Component {
     constructor(properties){
         super();
         this.state = {
-            appState: "menu",
+            appState: "login",
             menuState: "events",
             menuStateDetails: null,
             // the information showed in the Menu (details in the Menu.js file)

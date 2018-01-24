@@ -43,7 +43,7 @@ export default class Login extends Component {
     render() {
         return (
             <View style={styles.page}>
-                <Image source={require('./images/sp2.png')} style={styles.logo}/>
+                <Image source={require('../images/login/logoHighDefinition.png')} style={styles.logo}/>
                 <Text style={styles.information}> {this.state.message} </Text>
                 <View style={styles.form}>
                     <TextInput

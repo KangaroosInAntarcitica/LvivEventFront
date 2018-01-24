@@ -19,16 +19,16 @@ class EventInfo extends Component{
     render(){
         return(
             <View style={styles.eventInfo}>
-                <Image source={require('./images/eventFront.png')} style={styles.backgroundImage}/>
+                <Image source={require('../images/eventFront.png')} style={styles.backgroundImage}/>
                 {this.props.organisator ?
                     <View style={styles.infoOrganisator}>
-                        <Image style={styles.infoPicture} source={require('./images/person.png')}/>
+                        <Image style={styles.infoPicture} source={require('../images/icons/person.png')}/>
                         <Text style={styles.infoText}> {this.props.organisator} </Text>
                     </View>
                     : null}
                 {this.props.startdate ?
                     <View style={styles.infoTime}>
-                        <Image style={styles.infoPicture} source={require('./images/time.png')}/>
+                        <Image style={styles.infoPicture} source={require('../images/icons/time.png')}/>
                         <Text style={styles.infoText}> {this.props.startdate}</Text>
                     </View>
                     : null}
@@ -42,17 +42,17 @@ class EventDetails extends Component{
         return(
             <View style={styles.details}>
                 <View style={styles.detailsItem}>
-                    <Image style={styles.detailsImage} source={require('./images/person.png')}/>
+                    <Image style={styles.detailsImage} source={require('../images/icons/person.png')}/>
                     <Text style={styles.detailsTextName}> Organisator: </Text>
                     <Text style={styles.detailsText}> {this.props.organisator || 'unknown'} </Text>
                 </View>
                 <View style={styles.detailsItem}>
-                    <Image style={styles.detailsImage} source={require('./images/time.png')}/>
+                    <Image style={styles.detailsImage} source={require('../images/icons/time.png')}/>
                     <Text style={styles.detailsTextName}> Start date: </Text>
                     <Text style={styles.detailsText}> {this.props.startdate || 'unknown'} </Text>
                 </View>
                 <View style={styles.detailsItem}>
-                    <Image style={styles.detailsImage} source={require('./images/time.png')}/>
+                    <Image style={styles.detailsImage} source={require('../images/icons/time.png')}/>
                     <Text style={styles.detailsTextName}> End date: </Text>
                     <Text style={styles.detailsText}> {this.props.enddate || 'unknown'} </Text>
                 </View>
@@ -85,8 +85,8 @@ class Event extends Component{
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.extendButton} onPress={this.open.bind(this)}>
                             {this.state.open ?
-                                <Image style={styles.extendImage} source={require('./images/arrowLeft.png')}/>
-                                : <Image style={styles.extendImage} source={require('./images/arrowTop.png')}/>
+                                <Image style={styles.extendImage} source={require('../images/icons/arrowLeft.png')}/>
+                                : <Image style={styles.extendImage} source={require('../images/icons/arrowTop.png')}/>
                             }
                         </TouchableOpacity>
                     </View>

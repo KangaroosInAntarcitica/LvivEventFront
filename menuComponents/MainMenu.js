@@ -20,10 +20,10 @@ class HeaderItem extends Component{
         const style = this.props.selected ? styles.headerItemSelected : styles.headerItem;
         const imageStyle = this.props.selected ? styles.headerImageSelected : styles.headerImage;
         let image;
-        if(this.props.id === 'settings') image = require('./images/settings-icon.png');
-        else if(this.props.id === 'messages') image = require('./images/chat-icon-white.png');
-        else if(this.props.id === 'events') image = require('./images/calendar-icon-white.png');
-        else if(this.props.id === 'profile') image = require('./images/profile-icon-white.png');
+        if(this.props.id === 'settings') image = require('../images/icons/settings.png');
+        else if(this.props.id === 'messages') image = require('../images/icons/chat.png');
+        else if(this.props.id === 'events') image = require('../images/icons/calendar.png');
+        else if(this.props.id === 'profile') image = require('../images/icons/profile.png');
 
         return (
             <TouchableOpacity style={style} onPress={this.onPress.bind(this)}>
@@ -49,7 +49,7 @@ class MainMenuHeader extends PureComponent {
     {
         return (
             <View style={styles.header}>
-                <Image style={styles.backgroundImage} source={require('./images/mainMenuHeader.png')} />
+                <Image style={styles.backgroundImage} source={require('../images/mainMenuHeader.png')} />
                 <FlatList contentContainerStyle={styles.headerList}
                     data={this.props.data}
                     extraData={this.props.selected}
