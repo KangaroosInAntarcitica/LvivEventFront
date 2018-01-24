@@ -1,0 +1,19 @@
+# Custom gitignore for github
+.idea/
+
+__tests__/
+
+android/
+
+ios/
+
+node_modules/
+
+images/
+
+.babelrc
+.buckconfig
+.flowconfig
+.gitattributes
+.watchmanconfig
+index.js
