@@ -17,21 +17,21 @@ const url = "https://lvivevent.herokuapp.com/";
 // attributes: id (unique for tab), title (text displayed), onPress (function, optional)
 const defaultMenuData = {
     settings: [
-        {id: 'settings', title: 'Main settings', onPress: () => {Alert.alert('Info', 'worked!')}}
+        {id: 'settings', title: 'Main settings', icon: 'settings', onPress: () => {Alert.alert('Info', 'worked!')}}
     ],
     messages: [
-        {id: 'test1', title: 'Test message 1'},
-        {id: 'test2', title: 'Test message 2'}
+        {id: 'test1', icon: 'chat', title: 'Test message 1'},
+        {id: 'test2', icon: 'chat', title: 'Test message 2'}
     ],
     events: [
-        {id: 'events', title: 'Events', onPress: () => {setMenu('events', null)}},
-        {id: 'newEvent', title: 'New Event', onPress: () => {setMenu('newEvent', null)}}
+        {id: 'events', title: 'Events', icon: 'menu', onPress: () => {setMenu('events', null)}},
+        {id: 'newEvent', title: 'New Event', icon: 'calendar', onPress: () => {setMenu('newEvent', null)}}
     ],
     profile: [
-        {id: 'profile', title: 'My Profile'},
-        {id: 'friends', title: 'Friends'},
-        {id: 'profileSettings', title: 'Profile Settings'},
-        {id: 'logout', title: 'Log Out', onPress: () => {setAppState('login')}}
+        {id: 'profile'},
+        {id: 'friends', title: 'Friends', icon: 'profile.png'},
+        {id: 'profileSettings', title: 'Profile Settings', icon: 'settings'},
+        {id: 'logout', title: 'Log Out', icon: 'settings', onPress: () => {setAppState('login')}}
     ]
 };
 

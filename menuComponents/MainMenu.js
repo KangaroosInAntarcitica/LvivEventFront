@@ -1,5 +1,7 @@
 import React, {Component, PureComponent} from 'react';
-import {View, Text, TouchableOpacity, TouchableWithoutFeedback, Alert, StyleSheet, Image, FlatList} from 'react-native';
+import {View, Text, TouchableOpacity,  Alert, StyleSheet, Image, FlatList} from 'react-native';
+
+import MainMenuItem from '../menuComponents/MainMenuItem.js';
 
 // Can not be changed. Main menu data should have stuff for each of this. If other - won't be displayed
 const headerData = [
@@ -61,51 +63,6 @@ class MainMenuHeader extends PureComponent {
     }
 }
 
-class ProfileItem extends Component {
-    render(){
-        const style = this.props.selected ? styles.buttonSelected : styles.button;
-        const textStyle = this.props.selected ? styles.buttonTextSelected : styles.buttonText;
-        const imageStyle = this.props.selected ? styles.buttonImageSelected : styles.buttonImage;
-        return(
-            <TouchableOpacity style={styles.profileItem}>
-
-                <Image style={styles.profileItemPicture} source={require('../images/defaultProfile.png')} />
-                <Text style={styles.profileText} > {'Yuriy Mikolayovitch'} </Text>
-            </TouchableOpacity>
-        );
-        <Image style={styles.profileItemBack} source={require('../images/mainMenuHeader.png')} />
-    }
-}
-
-class MainMenuItem extends Component{
-    // Properties: data {id, title}; onPress(id); selected = bool
-    onPress(){
-        this.props.onPress(this.props.id);
-    }
-    renderButton(){
-        const style = this.props.selected ? styles.buttonSelected : styles.button;
-        const textStyle = this.props.selected ? styles.buttonTextSelected : styles.buttonText;
-        const imageStyle = this.props.selected ? styles.buttonImageSelected : styles.buttonImage;
-        return (
-            <TouchableOpacity style={style} onPress={this.onPress.bind(this)}>
-                <Image style={imageStyle} source={require('../images/icons/calendar.png')} />
-                <Text style={textStyle}> {this.props.title} </Text>
-            </TouchableOpacity>
-        );
-    }
-    renderTitle(){
-        return(
-            <Text style={styles.title}> {this.props.title} </Text>
-        );
-    }
-    render() {
-        if(this.props.type === 'button' || ! this.props.type)
-            return this.renderButton();
-        else if(this.props.type === 'title')
-            return this.renderTitle();
-    }
-}
-
 export default class MainMenu extends PureComponent {
     // Properties: data
     state = {
@@ -145,6 +102,7 @@ export default class MainMenu extends PureComponent {
             selected={!!(this.state.selected === item.id)}
             title={item.title}
             type={item.type}
+            icon={item.icon}
         />
     );
 
@@ -153,7 +111,6 @@ export default class MainMenu extends PureComponent {
         return (
             <View style={styles.page}>
                 <MainMenuHeader data={headerData} onPress={this.changeTab.bind(this)} selected={this.state.selectedTab}/>
-                <ProfileItem />
                 <FlatList
                     data={this.state.selectedData}
                     extraData={this.state}
@@ -178,41 +135,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         resizeMode: 'stretch'
     },
-    button: {
-        height: 50,
-        flexDirection: 'row'
-    },
-    buttonSelected: {
-        height: 50,
-        flexDirection: 'row',
-        backgroundColor: '#FFFFFF22'
-    },
-    buttonImage: {
-        width: 40,
-        height: 40,
-        margin: 5,
-        resizeMode: 'stretch',
-        tintColor: '#FFFFFFAA'
-    },
-    buttonImageSelected: {
-        width: 40,
-        height: 40,
-        margin: 5,
-        resizeMode: 'stretch',
-        tintColor: '#FFFFFF'
-    },
-    buttonText: {
-        color: '#FFFFFFAA',
-        fontSize: 20,
-        marginLeft: 10,
-        marginTop: 8
-    },
-    buttonTextSelected: {
-        color: '#FFFFFF',
-        fontSize: 20,
-        marginLeft: 10,
-        marginTop: 8
-    },
+
     title: {
         color: '#FFFFFF',
         fontSize: 20
@@ -252,34 +175,5 @@ const styles = StyleSheet.create({
         margin: 5,
         resizeMode: 'stretch',
         tintColor: '#8E44AD'
-    },
-
-    profileItem: {
-        width: '100%',
-        height: 100,
-        backgroundColor: '#8E44AD',
-        flexDirection: 'row'
-    },
-    profileItemBack: {
-        width: '100%',
-        height: 100,
-        bottom: 0,
-        left: 0,
-        position: 'absolute',
-        resizeMode: 'stretch'
-    },
-    profileItemPicture: {
-        width: 40,
-        height: 40,
-        margin: 5,
-        borderRadius: 100,
-        resizeMode: 'stretch'
-    },
-    profileText: {
-        color: 'white',
-        fontSize: 24,
-        marginHorizontal: 10,
-        marginTop: 6,
-        maxWidth: 210
     }
 });

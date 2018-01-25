@@ -15,6 +15,8 @@ const defaultEvent = {
 export default class Event extends Component{
     constructor(props){
         super();
+        this.props = props;
+
         const menuHeader = {
             name: props.event,
             buttons: [
@@ -26,9 +28,10 @@ export default class Event extends Component{
 
         this.state = {
             pageState: 'transfer',
-            event: defaultEvent
+            data: defaultEvent
         };
 
+        this.loadEvent.call(this);
         props.setMenuHeader(menuHeader);
     }
     setPageState(pageState){
@@ -36,25 +39,22 @@ export default class Event extends Component{
     }
     loadEvent(){
         let events;
-        fetch("https://lvivevent.herokuapp.com/" + 'events', {
+        fetch("https://lvivevent.herokuapp.com/" + 'getEvent/' + this.props.event, {
             method: 'GET'
         })
             .then((response) => response.json())
             .then((data) => {
-                events = data;
-            });
+                this.setState({data});
+            })
+            .catch(() => { Alert.alert('error')});
 
-        for(let i = 0; i < events.length; i++){
-            if(events[i].name === this.props.event)
-                this.state.event = events[i]
-        }
     }
     render(){
         if(this.state.pageState === 'description')
-            return(<Text> {this.state.event.description} </Text>);
+            return(<Text> {this.state.data.description} </Text>);
         if(this.state.pageState === 'transfer')
-            return(<Text> {this.state.event.transfer} </Text>);
+            return(<Text> {this.state.data.transfer} </Text>);
         if(this.state.pageState === 'timetable')
-            return(<Text> {this.state.event.timetable} </Text>);
+            return(<Text> {this.state.data.timetable} </Text>);
     }
 }
