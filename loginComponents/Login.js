@@ -1,23 +1,27 @@
 import React, {Component} from 'react';
-import {AppRegistry, Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Dimensions} from 'react-native';
+import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Dimensions} from 'react-native';
 
+import Icon from '../menuComponents/Icon.js'
 
 // properties: url, onSuccess, register
 export default class Login extends Component {
     constructor(properties) {
         super();
         this.state = {
-            message: ""
+            message: "",
+            error: false
         };
     }
 
     submit() {
-        if (this.state.username && this.state.password) {
-            this.setState({message: "Loading"});
+        if (! (this.state.username && this.state.password)) {
+            this.setState({message: "Nothing to submit!", error: false})
+        }
+        else{
+            this.setState({message: "Loading", error: false});
 
-            let url = this.props.url;
-
-            fetch(url + 'login', {
+            // Get status and print it back to user (formated)
+            fetch(this.props.url + 'login', {
                 method: 'POST',
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -29,13 +33,16 @@ export default class Login extends Component {
             }).then((data) => {
                 let status = data.status;
                 let message = status.charAt(0).toUpperCase() + status.slice(1) + "!";
-                this.setState({message})
 
                 // do the default on success activity
-                if (data.status == 'success')
+                if (data.status == 'success') {
+                    this.setState({message, error: false});
                     this.props.onSuccess();
+                } else{
+                    this.setState({message, error: true});
+                }
             }).catch(() => {
-                this.setState({message: "Error occurred!"})
+                this.setState({message: "Error occurred!", error: true})
             });
         }
     }
@@ -43,67 +50,63 @@ export default class Login extends Component {
     render() {
         return (
             <View style={styles.page}>
-                <Image source={require('../images/login/logoHighDefinition.png')} style={styles.logo}/>
-                <Text style={styles.information}> {this.state.message} </Text>
-                <View style={styles.form}>
-                    <TextInput
-                        placeholder="Login"
-                        onChangeText={(username) => {
-                            this.setState({username: username})
-                        }}
-                        onSubmitEditing={() => {
-                            this.refs.password.focus();
-                        }}
-                        style={styles.input}
-                        returnKeyType="go"
-                    />
-                    <TextInput
-                        ref="password"
-                        placeholder="Password"
-                        secureTextEntry
-                        onChangeText={(password) => {
-                            this.setState({password: password})
-                        }}
-                        onSubmitEditing={this.submit.bind(this)}
-                        style={styles.input}
-                    />
+                <Image source={require('../images/login/logoHighDefinition.png')} style={styles.logo} />
+                <Text style={this.state.error ? styles.informationError : styles.information}> {this.state.message} </Text>
+                <View style={styles.form} >
+                    <View style={styles.inputBox} >
+                        <Image style={styles.inputImage} source={require('../images/icons/profile.png')} />
+                        <TextInput
+                            placeholder="Login"
+                            onChangeText={(username) => {this.setState({username: username})}}
+                            onSubmitEditing={() => {this.refs.password.focus();}}
+                            style={styles.input}
+                            returnKeyType="go"
+                            underlineColorAndroid={'#0000'}
+                        />
+                    </View>
+                    <View style={styles.inputBox} >
+                        <Image style={styles.inputImage} source={require('../images/icons/lock.png')} />
+                        <TextInput
+                            ref="password"
+                            placeholder="Password"
+                            secureTextEntry
+                            onChangeText={(password) => {this.setState({password: password})}}
+                            onSubmitEditing={this.submit.bind(this)}
+                            style={styles.input}
+                            underlineColorAndroid={'#0000'}
+                        />
+                    </View>
                     <TouchableOpacity onPress={this.submit.bind(this)} style={styles.button}>
                         <Text style={styles.buttonText}> Log in </Text>
                     </TouchableOpacity>
-                </View>
-                <View style={styles.registercontainer}>
-                    <TouchableOpacity onPress={this.props.register}>
-                        <Text style={styles.text}>Create Account</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.props.register}>
-                        <Text style={styles.text}>Forgot Password?</Text>
-                    </TouchableOpacity>
+                    <View style={styles.registerContainer}>
+                        <TouchableOpacity onPress={this.props.register}>
+                            <Text style={styles.registerText}>Create Account</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.props.register}>
+                            <Text style={styles.registerText}>Forgot Password?</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
-        )
-            ;
+        );
     }
 }
 
+// padding is added if page width is greater than 340, else not added
 const styles = StyleSheet.create({
-    registercontainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginTop: 20
-    },
     page: {
         width: "100%",
         height: "100%",
-        padding: "10%",
+        padding: Dimensions.get('window').width < 340 ? "0%" : "10%",
         backgroundColor: "#FFFFFF",
         justifyContent: "center",
         alignItems: "center"
     },
     logo: {
         resizeMode: "contain",
-        padding: "40%",
-        width: 0, height: 0
+        width: '100%',
+        height: '40%'
     },
     information: {
         height: 36,
@@ -112,21 +115,52 @@ const styles = StyleSheet.create({
         textAlign: "center",
         margin: 5
     },
-    input: {
-        paddingHorizontal: 15,
-        paddingVertical: 5,
-        paddingBottom: 15,
-        margin: 5,
-        height: 40,
-        fontSize: 16,
-        width: "100%"
+    informationError: {
+        height: 36,
+        fontSize: 24,
+        color: "#ff6a4d",
+        textAlign: "center",
+        margin: 5
     },
-    button: {
-        marginTop: 30,
+
+    form: {
+        width: "100%",
+        maxWidth: 260,
+        height: 210
+    },
+    // height: 55
+    inputBox: {
+        paddingRight: 5,
+        paddingLeft: 0,
+        paddingBottom: 10,
         margin: 5,
+        marginBottom: 10,
+        height: 40,
+        width: "100%",
+        borderColor: '#999999',
+        borderBottomWidth: 2,
+        flexDirection: 'row'
+    },
+    inputImage: {
+        width: 30,
+        height: 30,
+        margin: 5,
+        resizeMode: 'stretch',
+        tintColor: '#999999'
+    },
+    input: {
+        height: 45,
+        fontSize: 20,
+        margin: 0,
+        width: "100%",
+    },
+    // height: 60
+    button: {
+        margin: 5,
+        marginTop: 15,
         height: 40,
         borderRadius: 20,
-        backgroundColor: "#36A9E1",
+        backgroundColor: "#a05abf",
         width: "100%"
     },
     buttonText: {
@@ -135,14 +169,17 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: "#FFFFFF"
     },
-    text: {
+    // height: 40
+    registerContainer: {
+        width: '100%',
+        height: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: 10
+    },
+    registerText: {
         color: '#999999',
         backgroundColor: 'transparent',
-        paddingHorizontal: 12,
+        paddingHorizontal: 5,
     },
-    form: {
-        width: "100%",
-        maxWidth: 260,
-        height: 176
-    }
 });

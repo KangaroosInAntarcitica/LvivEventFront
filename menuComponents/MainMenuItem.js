@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity,  Alert, StyleSheet, Image, FlatList} from 'react-native';
 
+import Icon from '../menuComponents/Icon.js';
+
 const profileStyles = StyleSheet.create({
     item: {
         width: '100%',
@@ -114,20 +116,14 @@ const buttonStyles = StyleSheet.create({
     },
 });
 class ButtonItem extends Component{
-    setImage(){
-        const imageStyle = this.props.selected ? buttonStyles.image : buttonStyles.imageSelected;
-        if(this.props.icon === 'settings')
-            return <Image style={imageStyle} source={require('../images/icons/settings.png')} />
-        else
-            return <Image style={imageStyle} source={require('../images/icons/menu.png')} />
-    }
     render(){
         const style = this.props.selected ? buttonStyles.itemSelected : buttonStyles.item;
         const textStyle = this.props.selected ? buttonStyles.textSelected : buttonStyles.text;
+        const imageStyle = this.props.selected ? buttonStyles.image : buttonStyles.imageSelected;
 
         return (
             <TouchableOpacity style={style} onPress={() => { this.props.onPress(this.props.id) }}>
-                { this.setImage.call(this) }
+                <Icon style={imageStyle} icon={this.props.icon} />
                 <Text style={textStyle}> {this.props.title} </Text>
             </TouchableOpacity>
         );

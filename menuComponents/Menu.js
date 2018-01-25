@@ -16,13 +16,13 @@ class Header extends Component{
             <View style={styles.header}>
                 <View>
                     <TouchableOpacity onPress={ () => {} } style={styles.headerButton}>
-                        <Image style={styles.backgroundImage} source={require('../images/icons/backArrow.png')} />
+                        <Image style={styles.backgroundImage} source={require('../images/iconsNavigation/backArrow.png')} />
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.headerText}> { this.props.text } </Text>
                 <View style={{flexDirection: 'row'}} >
                     <TouchableOpacity onPress={ ()=>{} } style={styles.headerButton} >
-                        <Image style={styles.backgroundImage} source={require('../images/icons/search.png')} />
+                        <Image style={styles.backgroundImage} source={require('../images/iconsNavigation/search.png')} />
                     </TouchableOpacity>
                 </View>
             </View>

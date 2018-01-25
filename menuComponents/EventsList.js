@@ -84,8 +84,8 @@ class Event extends Component{
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.extendButton} onPress={this.open.bind(this)}>
                             {this.state.open ?
-                                <Image style={styles.extendImage} source={require('../images/icons/arrowLeft.png')}/>
-                                : <Image style={styles.extendImage} source={require('../images/icons/arrowTop.png')}/>
+                                <Image style={styles.extendImage} source={require('../images/iconsNavigation/arrowLeft.png')}/>
+                                : <Image style={styles.extendImage} source={require('../images/iconsNavigation/arrowTop.png')}/>
                             }
                         </TouchableOpacity>
                     </View>

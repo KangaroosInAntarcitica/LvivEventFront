@@ -29,7 +29,7 @@ const defaultMenuData = {
     ],
     profile: [
         {id: 'profile'},
-        {id: 'friends', title: 'Friends', icon: 'profile.png'},
+        {id: 'friends', title: 'Friends', icon: 'profile'},
         {id: 'profileSettings', title: 'Profile Settings', icon: 'settings'},
         {id: 'logout', title: 'Log Out', icon: 'settings', onPress: () => {setAppState('login')}}
     ]
@@ -39,7 +39,7 @@ export default class Application extends Component {
     constructor(properties){
         super();
         this.state = {
-            appState: "menu",
+            appState: "login",
             menuState: "events",
             menuStateDetails: null,
             // the information showed in the Menu (details in the Menu.js file)
