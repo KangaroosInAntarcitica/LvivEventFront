@@ -15,7 +15,11 @@ const menuHeader = {
     ]
 };
 
+// TODO stop passing each event property (startdate, enddate, organisator ...), separately, but pass them as a single data object
+
 class EventInfo extends Component{
+    // info is shown if event details are closed
+    // TODO rewrite info to be automatic, when the database is finished
     render(){
         return(
             <View style={styles.eventInfo}>
@@ -37,6 +41,8 @@ class EventInfo extends Component{
 }
 
 class EventDetails extends Component{
+    // extended details about the event
+    // TODO rewrite details to be automatic, when the database is finished
     render(){
         return(
             <View style={styles.details}>
@@ -104,6 +110,8 @@ export default class EventsList extends Component{
     constructor(props){
         super();
         this.state = {data: testEvents};
+
+        // call to load events from the internet
         this.getEvents.call(this);
 
         // set menu header to default menu header for events
@@ -116,7 +124,7 @@ export default class EventsList extends Component{
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ data })
-            });
+            }).catch(() => {})
     }
     renderItem({item}){
         return <Event
@@ -254,18 +262,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF'
     },
     detailsTextName: {
+        marginTop: 3,
         width: 120,
         fontSize: 18,
         color: '#BBBBBB'
     },
     detailsText: {
+        marginTop: 3,
         fontSize: 18,
         color: '#999999'
     },
     detailsImage: {
-        width: 18,
-        height: 18,
-        margin: 5,
+        width: 24,
+        height: 24,
+        margin: 3,
         tintColor: '#2E72A0',
         marginHorizontal: 10
     }

@@ -39,12 +39,12 @@ export default class Application extends Component {
     constructor(properties){
         super();
         this.state = {
-            appState: "login",
+            appState: "menu",
             menuState: "events",
             menuStateDetails: null,
             // the information showed in the Menu (details in the Menu.js file)
             menuHeader: {
-                name: 'me', buttons: []
+                name: 'me', buttons: [{id: 'events'}]
             }
         };
 

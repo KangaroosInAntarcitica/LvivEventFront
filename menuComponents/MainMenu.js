@@ -2,34 +2,26 @@ import React, {Component, PureComponent} from 'react';
 import {View, Text, TouchableOpacity,  Alert, StyleSheet, Image, FlatList} from 'react-native';
 
 import MainMenuItem from '../menuComponents/MainMenuItem.js';
+import Icon from '../menuComponents/Icon.js';
 
 // Can not be changed. Main menu data should have stuff for each of this. If other - won't be displayed
 const headerData = [
-    {id: 'settings'},
-    {id: 'messages'},
-    {id: 'events'},
-    {id: 'profile'}
+    {id: 'settings', icon: 'settings'},
+    {id: 'messages', icon: 'chat'},
+    {id: 'events', icon: 'calendar'},
+    {id: 'profile', icon: 'profile'}
 ];
 
 class HeaderItem extends Component{
     // An option in the header menu. The defaults are in the header items. Set in the data
-    // Properties: id (image is chosen by id); onPress(id); selected = bool; title (text)
-    // type = 'button', 'title', 'info'
-    onPress(){
-        this.props.onPress(this.props.id);
-    }
+    // Properties: id; onPress(id); selected = bool; icon = icon
     render() {
         const style = this.props.selected ? styles.headerItemSelected : styles.headerItem;
         const imageStyle = this.props.selected ? styles.headerImageSelected : styles.headerImage;
-        let image;
-        if(this.props.id === 'settings') image = require('../images/icons/settings.png');
-        else if(this.props.id === 'messages') image = require('../images/icons/chat.png');
-        else if(this.props.id === 'events') image = require('../images/icons/calendar.png');
-        else if(this.props.id === 'profile') image = require('../images/icons/profile.png');
 
         return (
-            <TouchableOpacity style={style} onPress={this.onPress.bind(this)}>
-                <Image style={imageStyle} source={ image } />
+            <TouchableOpacity style={style} onPress={() => this.props.onPress(this.props.id)}>
+                <Icon style={imageStyle} icon={this.props.icon} />
             </TouchableOpacity>
         );
     }
@@ -37,13 +29,13 @@ class HeaderItem extends Component{
 
 class MainMenuHeader extends PureComponent {
     // The header.
-    // Properties: data {id}; onPress; selected = id
+    // Properties: data obj{id, icon}; onPress(id); selected = id
     renderItem = ({item}) => (
         <HeaderItem
             id={item.id}
             onPress={this.props.onPress}
             selected={!!(this.props.selected === item.id)}
-            image={item.image}
+            icon={item.icon}
         />
     );
 
@@ -52,7 +44,8 @@ class MainMenuHeader extends PureComponent {
         return (
             <View style={styles.header}>
                 <Image style={styles.backgroundImage} source={require('../images/mainMenuHeader.png')} />
-                <FlatList contentContainerStyle={styles.headerList}
+                <FlatList
+                    contentContainerStyle={styles.headerList}
                     data={this.props.data}
                     extraData={this.props.selected}
                     keyExtractor={(item, index) => item.id}
@@ -66,20 +59,19 @@ class MainMenuHeader extends PureComponent {
 export default class MainMenu extends PureComponent {
     // Properties: data
     state = {
-        // responsible for current menu state (can be one of settings, messages, events, profile)
+        // responsible for current menu state (can be one of headerData)
+        // selectedTab is just the tab id
+        // selectedData is the object with data corresponding to selected tab
         selectedTab: 'events',
         selectedData: this.props.data['events'],
         // responsible for selected item in submenu
         selected: this.props.data['events'][0].id,
     };
 
-    keyExtractor = (item, index) => item.id;
-
     changeTab = (id) => {
         this.setState({
             selectedTab: id,
-            selectedData: this.props.data[id],
-            selected: this.props.data[id][0].id
+            selectedData: this.props.data[id]
         });
     };
 
@@ -114,7 +106,7 @@ export default class MainMenu extends PureComponent {
                 <FlatList
                     data={this.state.selectedData}
                     extraData={this.state}
-                    keyExtractor={this.keyExtractor}
+                    keyExtractor={(item, key) => item.id}
                     renderItem={this.renderItem}
                 />
             </View>

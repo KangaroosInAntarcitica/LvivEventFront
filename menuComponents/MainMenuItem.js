@@ -18,8 +18,8 @@ const profileStyles = StyleSheet.create({
     pictureHolder: {
         margin: 5,
         borderRadius: 45,
-        borderWidth: 2,
-        borderColor: '#FFFFFF99',
+        padding: 2,
+        backgroundColor: '#FFF9',
         width: 70,
         height: 70
     },
@@ -70,7 +70,7 @@ class ProfileItem extends Component {
                     <Image style={profileStyles.picture} source={require('../images/trump.jpg')} />
                 </View>
                 <View style={{flexDirection: 'column'}}>
-                    <Text style={textStyle} > {'Andriy Dmytruk Andriyovitch'} </Text>
+                    <Text style={textStyle} > {'Vitalik Trump'} </Text>
                     <Text style={textUnderStyle} > {'Profile'} </Text>
                 </View>
             </TouchableOpacity>

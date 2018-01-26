@@ -10,6 +10,8 @@ const defaultMenuHeader = {
     ]
 };
 
+// TODO add an info bar showing the state: loading || no internet connection
+
 class Header extends Component{
     render(){
         return(
@@ -31,39 +33,32 @@ class Header extends Component{
 }
 
 class Option extends Component{
-    onPress() {
-        this.props.onPress(this.props.id);
-    }
     render(){
-        if(this.props.selected)
-            return(
-                <TouchableOpacity onPress={ this.onPress.bind(this) } style={styles.optionsButtonSelected}>
-                    <Text style={styles.optionsTextSelected}> {this.props.title} </Text>
-                </TouchableOpacity>
-            );
-        else
-            return(
-                <TouchableOpacity onPress={ this.onPress.bind(this) } style={styles.optionsButton}>
-                    <Text style={styles.optionsText}> {this.props.title} </Text>
-                </TouchableOpacity>
-            );
+        const style = this.props.selected ? styles.optionsButtonSelected : styles.optionsButton;
+        const styleText = this.props.selected ? styles.optionsTextSelected : styles.optionsText;
+        return(
+            <TouchableOpacity onPress={ () => this.props.onPress(this.props.id) } style={style}>
+                <Text style={styleText}> {this.props.title} </Text>
+            </TouchableOpacity>
+        );
     }
 }
 
 class Options extends PureComponent{
-    state = { selected: null}
+    constructor(props){
+        super();
+        this.state = { selected: null };
+    }
+
     onPressItem(id){
-        // set
+        // set selected
         this.setState({selected: id});
-        // call the function
+        // loop through all, find required and call the function
         for(let i = 0; i < this.props.data.length; i++){
             let item = this.props.data[i];
             if(item.id === id)
                 item.onPress(id);
         }
-    }
-    keyExtractor(item, index){
-        return item.id;
     }
     renderItem({item}){
         return(
@@ -83,7 +78,7 @@ class Options extends PureComponent{
                     contentContainerStyle={styles.optionsList}
                     data={this.props.data}
                     extraData={this.state}
-                    keyExtractor={this.keyExtractor.bind(this)}
+                    keyExtractor={(item, index) => item.id}
                     renderItem={this.renderItem.bind(this)}
                 />
             </View>
@@ -139,8 +134,6 @@ const styles = StyleSheet.create({
     options: {
         width: "100%",
         height: 50,
-        justifyContent: "flex-start",
-        flexDirection: "row",
         backgroundColor: "#a05abf"
     },
     optionsList: {
@@ -155,11 +148,11 @@ const styles = StyleSheet.create({
         height: 50,
         borderBottomWidth: 5,
         backgroundColor: "#a05abf",
-        borderColor: "#FFFFFF"
+        borderColor: "#FFFFFF99"
     },
     optionsText: {
         fontSize: 24,
-        color: "#FFFFFF",
+        color: "#FFFFFF55",
         paddingTop: 8,
         paddingHorizontal: 4,
         fontWeight: 'normal'

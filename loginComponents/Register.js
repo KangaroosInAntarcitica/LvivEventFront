@@ -3,7 +3,7 @@ import { AppRegistry, Text, View, StyleSheet, Image, TextInput, TouchableOpacity
 
 
 // properties: url, onSuccess, register
-export default class Login extends Component{
+export default class Register extends Component{
     constructor(properties){
         super();
         this.state = {
