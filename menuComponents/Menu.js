@@ -61,6 +61,13 @@ class Options extends PureComponent{
         }
     }
     renderItem({item}){
+        // If no item selected now, select current item
+        let found = false;
+        for(i of this.props.data)
+            if(i.id === this.state.selected) found = true;
+        if(!found) this.state.selected = item.id;
+
+
         return(
             <Option
                 title={item.title}
