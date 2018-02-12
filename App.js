@@ -10,6 +10,7 @@ import Event from "./menuComponents/Event.js";
 import NewEvent from "./menuComponents/NewEvent.js";
 
 import SideMenu from './node_modules/react-native-side-menu/index.js'
+import Calendar from "./calendar/Calendar";
 
 // some constants
 const url = "https://lvivevent.herokuapp.com/";
@@ -25,6 +26,7 @@ const defaultMenuData = {
     ],
     events: [
         {id: 'events', title: 'Events', icon: 'menu', onPress: () => {setMenu('events', null)}},
+        {id: 'calendar', title: 'Calendar', icon: 'calendar', onPress: () => {setMenu('calendar', null)}},
         {id: 'newEvent', title: 'New Event', icon: 'calendar', onPress: () => {setMenu('newEvent', null)}}
     ],
     profile: [
@@ -40,7 +42,7 @@ export default class Application extends Component {
         super();
         this.state = {
             appState: "menu",
-            menuState: "events",
+            menuState: "calendar",
             menuStateDetails: null,
             // the information showed in the Menu (details in the Menu.js file)
             menuHeader: {
@@ -89,6 +91,9 @@ export default class Application extends Component {
                 innerPage={<NewEvent url={"https://lvivevent.herokuapp.com/"} setMenuHeader={this.setMenuHeader}/>}
                 menuHeader={this.state.menuHeader}
             />
+        }
+        else if(this.state.menuState === "calendar") {
+            return <Calendar />
         }
     }
     getPage(){
