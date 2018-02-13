@@ -19,49 +19,53 @@ class Header extends Component{
     }
 }
 
+const cellWidth = (Dimensions.get('window').width - 40) / 7;
+const rowMarginHorizontal = 20;
+const rowWidth = Dimensions.get('window').width - rowMarginHorizontal * 2;
 const monthStyles = StyleSheet.create({
     block: {
-        width: '100%',
         backgroundColor: '#FFFFFF',
-        padding: 20
+        marginVertical: 20
     },
     list: {
         flexDirection: 'column'
     },
     line: {
-        width: '100%',
+        marginHorizontal: rowMarginHorizontal,
+        width: rowWidth,
         height: 1,
         backgroundColor: '#DDDDDD'
     },
     row: {
-        width: '100%',
+        marginHorizontal: rowMarginHorizontal,
+        width: rowWidth,
         marginVertical: 0,
-        height: (Dimensions.get('window').width - 40) / 7,
+        height: cellWidth,
         flexDirection: 'row'
     },
     rowBack: {
-        height: 100,
+        height: '100%',
         borderLeftWidth: 1,
         borderRightWidth: 1,
-        position: 'absolute',
-        left: 0
+        position: 'absolute'
     },
     rowDay: {
-        width: '100%',
+        marginHorizontal: 20,
+        width: rowWidth,
         marginVertical: 0,
         flexDirection: 'row'
     },
     cellEmpty: {
-        width: (Dimensions.get('window').width - 40) / 7,
-        height: (Dimensions.get('window').width - 40) / 7
+        width: cellWidth,
+        height: cellWidth
     },
     cell: {
-        width: (Dimensions.get('window').width - 40) / 7 - 10,
-        height: (Dimensions.get('window').width - 40) / 7 - 10,
+        width: cellWidth - 10,
+        height: cellWidth - 10,
         margin: 5,
     },
     cellDay: {
-        width: (Dimensions.get('window').width - 40) / 7 - 10,
+        width: cellWidth - 10,
         fontSize: 20,
         margin: 5,
         color: '#CAA3DB',
@@ -75,8 +79,10 @@ const monthStyles = StyleSheet.create({
     },
     cellText: {
         color: '#333333',
-        paddingTop: 8,
-        fontSize: 20,
+        // cellWidth (without margin) / 2 - so text is centered horizontally
+        paddingTop: (cellWidth - 26 - 10) / 2,
+        height: 34,
+        fontSize: 20, // = 26px
         textAlign: 'center'
     },
     nameText: {
@@ -112,17 +118,41 @@ class CalendarMonth extends Component{
         for(let i = 0; i < events.length; i++){
             const start = Date.getDate(events[i].startdate), end = Date.getDate(events[i].enddate);
             // TODO !!! Add better condition (may have started before and ended after)
-            if((start.year === this.props.year && start.month === this.props.month) ||
-                (end.year === this.props.year && end.month === this.props.month)){
-                const maxWidth = Dimensions.get('window').width - 40;
-                const left = maxWidth / 7 * (start.day - item[0] + start.hour / 24);
-                const width = maxWidth / 7 * (end.day - item[0] + end.hour / 24) - left;
 
-                const line = <View
-                    style={[monthStyles.rowBack, {left: left, width: width, backgroundColor: colors[i] + '2', borderColor: colors[i]}]}
-                    key={i}
-                />
-                eventLines.push(line)
+            if(
+                (start.year === this.props.year && start.month === this.props.month) ||
+                (end.year === this.props.year && end.month === this.props.month)
+            ){
+                const minDay = item[0], maxDay = item[item.length - 1];
+                let left, width;
+
+                if(start.day < minDay && end.day > maxDay) {
+                    left = 0;
+                    width = cellWidth * 7;
+                } else if(start.day >= minDay && end.day <= maxDay){
+                    left = (start.day - minDay + start.hour / 24) * cellWidth;
+                    width = (end.day - minDay + end.hour / 24) * cellWidth - left;
+                } else if(start.day <= minDay && end.day >= minDay /* && !(end.day == minDay && end.hour == 0) */ ){
+                    left = 0;
+                    width = (end.day - minDay + end.hour / 24) * cellWidth - left;
+                } else if(start.day <= maxDay && end.day >= maxDay){
+                    left = (start.day - minDay + start.hour / 24) * cellWidth;
+                    width = cellWidth * 7 - left;
+                }
+
+                if(left !== undefined && width !== undefined) {
+                    const line = <View
+                        style={[
+                            monthStyles.rowBack,
+                            { left: left + rowMarginHorizontal,
+                                width: width,
+                                backgroundColor: colors[i] + '2',
+                                borderColor: colors[i] }
+                        ]}
+                        key={i}
+                    />
+                    eventLines.push(line)
+                }
             }
         }
 
@@ -213,7 +243,6 @@ const eventsStyles = StyleSheet.create({
         width: 30,
         height: 30,
         margin: 5,
-        borderWidth: 2,
         borderRadius: 15
     },
     eventName: {
@@ -246,7 +275,7 @@ class CalendarEvents extends Component{
                         <Text style={eventsStyles.moreText}>More</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={[eventsStyles.eventColor, {borderColor: colors[index], backgroundColor: colors[index] + '2'}]}
+                        style={[eventsStyles.eventColor, { backgroundColor: colors[index] + '8'}]}
                         onPress={() => { this.props.setDate(item.startdate) }}
                     />
                 </View>

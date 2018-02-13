@@ -48,7 +48,7 @@ export default class Date{
                 rowDates.push(date + 1);
             }
 
-            if(!(dates.length > 0 && rowDates[0] === 0)) dates.push(rowDates);
+            if(!(dates.length > 0 && rowDates[0] > Date.monthLengths[month])) dates.push(rowDates);
         }
 
         return dates;
